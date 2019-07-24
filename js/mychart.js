@@ -35,20 +35,26 @@ const loadCharts = function () {
 
 
 const Data={
-  labels:[-10,9,8,7,6,5,4,3,2,1,0,1,2,3,4,5,6,7,8,9,10]
+  labels:[-10,9,8,7,6,5,4,3,2,1,0,1,2,3,4,5,6,7,8,9,10],
+  data:[1,1,1,1,1,1,1,1]
 };
 
 
 const loadCharts2 = function(){
-  const data = [1,2,3,4,5,5];
+    let data = new Array();
+    for (let i = 0; i < Data.labels.length; i++) {
+        data.push((Data.labels[i] * Data.labels[i] * Data.labels[i]) - (Data.labels[i] / 2) + 4);
+    }
+    console.log(data);
+    // Data.data = new Array(data);
   const chartDataSet = {
     type: 'line',
     data: {
-      labels: sampleData.labels,
+      labels: Data.labels,
       datasets: [{
         label: 'sample1',
         data: data,
-        backgroundColor: 'rgba(60, 160, 220, 0.3)',
+        backgroundColor: 'rgba(0, 0, 0, 0.0)',
         borderColor: 'rgba(60, 160, 220, 0.8)'
       }]
     },
