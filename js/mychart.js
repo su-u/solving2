@@ -35,7 +35,7 @@ const loadCharts = function () {
 
 
 const Data={
-  labels:[-10,9,8,7,6,5,4,3,2,1,0,1,2,3,4,5,6,7,8,9,10],
+  labels:[-10,-9,-8,-7,-6,-5,-4,-3,-2,-1,0,1,2,3,4,5,6,7,8,9,10],
   data:[1,1,1,1,1,1,1,1]
 };
 
@@ -44,7 +44,7 @@ const loadCharts2 = function(){
     let data = new Array();
     let data2 = new Array();
     for (let i = 0; i < Data.labels.length; i++) {
-        data.push((Data.labels[i] * Data.labels[i] * Data.labels[i]) - (Data.labels[i] / 2) + 4);
+        data.push((Data.labels[i]) - (Data.labels[i] / 2) + 4);
         data2.push(Data.labels[i])
 
     }
@@ -57,7 +57,7 @@ const loadCharts2 = function(){
       datasets: [{
         type: "line",
         label: 'sample1',
-        data: [,,,,,,,,,,2],
+        data: [{x:2,y:0}],
         backgroundColor: 'rgba(200, 100, 100, 1.0)',
         pointRadius:10,
         // borderColor: 'rgba(60, 160, 220, 0.8)'
