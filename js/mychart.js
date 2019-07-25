@@ -73,15 +73,27 @@ const loadCharts2 = function(data){
   };
 
   const ctx = document.createElement('canvas');
-  document.getElementById('chart-area').appendChild(ctx);
-  new Chart(ctx, chartDataSet);
+  // document.getElementById('chart-area').appendChild(ctx);
+  // new Chart(ctx, chartDataSet);
+  var myChart = new  Chart( document.getElementById("mycanvas")
+      .getContext("2d"),chartDataSet);
 
 };
 
-// グラフ作成
+// for (let i = 0; i < Data.labels.length; i++) {
+//     data.push((Data.labels[i] * Data.labels[i]) - (Data.labels[i] / 2) + 4);
+//     loadCharts2(data);
+// }
 let data = new Array();
-for (let i = 0; i < Data.labels.length; i++) {
-    data.push((Data.labels[i] * Data.labels[i]) - (Data.labels[i] / 2) + 4);
-    loadCharts2(data);
-    sleep
-}
+let timer;
+let i = 0;
+
+const ManageLine = function() {
+  data.push((Data.labels[i] * Data.labels[i]) - (Data.labels[i] / 2) + 4);
+  loadCharts2(data);
+  if(i >= Data.labels.length)clearInterval(timer);
+  i++;
+};
+window.onload = function(){
+  timer = setInterval("ManageLine()", 1000);
+};
