@@ -40,14 +40,14 @@ const Data={
 };
 
 
-const loadCharts2 = function(){
-    let data = new Array();
-    let data2 = new Array();
-    for (let i = 0; i < Data.labels.length; i++) {
-        data.push((Data.labels[i]) - (Data.labels[i] / 2) + 4);
-        data2.push(Data.labels[i])
-
-    }
+const loadCharts2 = function(data){
+    // let data = new Array();
+    // let data2 = new Array();
+    // for (let i = 0; i < Data.labels.length; i++) {
+    //     data.push((Data.labels[i] * Data.labels[i]) - (Data.labels[i] / 2) + 4);
+    //     data2.push(Data.labels[i])
+    //
+    // }
     console.log(data);
     // Data.data = new Array(data);
   const chartDataSet = {
@@ -57,14 +57,14 @@ const loadCharts2 = function(){
       datasets: [{
         type: "line",
         label: 'sample1',
-        data: [{x:2,y:0}],
+        data: [{x:1,y:30}],
         backgroundColor: 'rgba(200, 100, 100, 1.0)',
         pointRadius:10,
         // borderColor: 'rgba(60, 160, 220, 0.8)'
     },{
         type: "line",
         label: 'sample2',
-        data: data2,
+        data: data,
         backgroundColor: 'rgba(0, 0, 0, 0.0)',
         borderColor: 'rgba(60, 160, 220, 0.8)'
           }
@@ -76,7 +76,12 @@ const loadCharts2 = function(){
   document.getElementById('chart-area').appendChild(ctx);
   new Chart(ctx, chartDataSet);
 
-}
+};
 
 // グラフ作成
-loadCharts2();
+let data = new Array();
+for (let i = 0; i < Data.labels.length; i++) {
+    data.push((Data.labels[i] * Data.labels[i]) - (Data.labels[i] / 2) + 4);
+    loadCharts2(data);
+    sleep
+}
