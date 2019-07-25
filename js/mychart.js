@@ -41,15 +41,7 @@ const Data={
 
 
 const loadCharts2 = function(data){
-    // let data = new Array();
-    // let data2 = new Array();
-    // for (let i = 0; i < Data.labels.length; i++) {
-    //     data.push((Data.labels[i] * Data.labels[i]) - (Data.labels[i] / 2) + 4);
-    //     data2.push(Data.labels[i])
-    //
-    // }
     console.log(data);
-    // Data.data = new Array(data);
   const chartDataSet = {
     type: 'line',
       data: {
@@ -69,7 +61,11 @@ const loadCharts2 = function(data){
         borderColor: 'rgba(60, 160, 220, 0.8)'
           }
       ]},
-      options: {}
+      options: {
+        animation: {
+          duration: 0,
+        }
+      }
   };
 
   const ctx = document.createElement('canvas');
@@ -80,10 +76,6 @@ const loadCharts2 = function(data){
 
 };
 
-// for (let i = 0; i < Data.labels.length; i++) {
-//     data.push((Data.labels[i] * Data.labels[i]) - (Data.labels[i] / 2) + 4);
-//     loadCharts2(data);
-// }
 let data = new Array();
 let timer;
 let i = 0;
@@ -95,5 +87,5 @@ const ManageLine = function() {
   i++;
 };
 window.onload = function(){
-  timer = setInterval("ManageLine()", 1000);
+  timer = setInterval("ManageLine()", 500);
 };
