@@ -51,6 +51,10 @@ const ManageLine = function () {
     if (i >= Data.labels.length) clearInterval(timer);
     i++;
 };
-window.onload = function () {
+
+const start = function () {
     timer = setInterval("ManageLine()", 500);
+};
+window.onload = function () {
+    loadCharts2();
 };
