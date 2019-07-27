@@ -4,7 +4,7 @@ const Data = {
 };
 
 
-const loadCharts2 = function (data) {
+const loadCharts = function (data) {
     console.log(data);
     const chartDataSet = {
         type: 'line',
@@ -16,7 +16,6 @@ const loadCharts2 = function (data) {
                 data: [{x: 1, y: 30}],
                 backgroundColor: 'rgba(200, 100, 100, 1.0)',
                 pointRadius: 10,
-                // borderColor: 'rgba(60, 160, 220, 0.8)'
             }, {
                 type: "line",
                 label: 'sample2',
@@ -47,7 +46,7 @@ let i = 0;
 
 const ManageLine = function () {
     data.push((Data.labels[i] * Data.labels[i]) - (Data.labels[i] / 2) + 4);
-    loadCharts2(data);
+    loadCharts(data);
     if (i >= Data.labels.length) clearInterval(timer);
     i++;
 };
@@ -56,5 +55,5 @@ const start = function () {
     timer = setInterval("ManageLine()", 500);
 };
 window.onload = function () {
-    loadCharts2();
+    loadCharts();
 };
