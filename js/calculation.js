@@ -4,7 +4,6 @@ const nibun = (a, b, func) => {
     let dot = [];
     let count = 1;
     let c;
-    let output = document.querySelector('#output');
     do {
         c = (a + b) / 2.0; // 2分計算
         if (func(c) * func(a) < 0) b = c;
