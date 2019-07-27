@@ -8,11 +8,37 @@ let data = new Array();
 let timer;
 let i = 0;
 
-let
+const func = x =>{
+    return Math.pow(x, 3.0) + x - 1.0;
+};
+
+let dot = nibun(0.0,1.0,func);
+
+console.log(dot);
+for (let j = 0; j < Data.labels.length; j++) {
+    data.push(func(Data.labels[j]));
+}
+console.log(data);
+
+let chartData = {
+    labels: Data.labels,
+        datasets: [{
+    type: "line",
+    label: 'sample1',
+    data: [{x: 1, y: 30}],
+    backgroundColor: 'rgba(200, 100, 100, 1.0)',
+    pointRadius: 10,
+}, {
+    type: "line",
+    label: 'sample2',
+    data: data,
+    backgroundColor: 'rgba(0, 0, 0, 0.0)',
+    borderColor: 'rgba(60, 160, 220, 0.8)'
+}]
+};
 
 const ManageLine = function () {
-    data.push((Data.labels[i] * Data.labels[i]) - (Data.labels[i] / 2) + 4);
-    loadCharts(data);
+    loadCharts(chartData);
     if (i >= Data.labels.length) clearInterval(timer);
     i++;
 };
@@ -21,5 +47,5 @@ const start = function () {
     timer = setInterval("ManageLine()", 500);
 };
 window.onload = function () {
-    loadCharts();
+    ChartsDisplay(chartData);
 };
