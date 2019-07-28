@@ -3,7 +3,6 @@ const Data = {
     data: [1, 1, 1, 1, 1, 1, 1, 1]
 };
 
-
 let data = new Array();
 let timer;
 let i = 0;
@@ -20,25 +19,26 @@ for (let j = 0; j < Data.labels.length; j++) {
 }
 console.log(data);
 
-let chartData = {
-    labels: Data.labels,
+const chartData = (data) =>{
+    return  {
+        labels: Data.labels,
         datasets: [{
-    type: "line",
-    label: 'sample1',
-    data: [{x: 1, y: 30}],
-    backgroundColor: 'rgba(200, 100, 100, 1.0)',
-    pointRadius: 10,
-}, {
-    type: "line",
-    label: 'sample2',
-    data: data,
-    backgroundColor: 'rgba(0, 0, 0, 0.0)',
-    borderColor: 'rgba(60, 160, 220, 0.8)'
-}]
+            type: "line",
+            label: 'sample1',
+            data: [{x: 1, y: 30}],
+            backgroundColor: 'rgba(200, 100, 100, 1.0)',
+            pointRadius: 10,
+        }, {
+            type: "line",
+            label: 'sample2',
+            data: data,
+            backgroundColor: 'rgba(0, 0, 0, 0.0)',
+            borderColor: 'rgba(60, 160, 220, 0.8)'
+    }]}
 };
 
 const ManageLine = function () {
-    loadCharts(chartData);
+    loadCharts(chartData(data));
     if (i >= Data.labels.length) clearInterval(timer);
     i++;
 };

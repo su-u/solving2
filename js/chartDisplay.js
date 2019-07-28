@@ -1,5 +1,4 @@
-const ChartsDisplay = data => {
-    console.log(data);
+const ChartsDisplay = (data) => {
     const chartDataSet = {
         type: 'line',
         data: data,
