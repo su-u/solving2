@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/su-u/solving2#readme",
   "dependencies": {
-    "mocha": "^6.2.0"
+    "expect": "^24.8.0",
+    "mocha": "^6.2.0",
+    "supertest": "^4.0.2"
   }
 }
