@@ -30,7 +30,7 @@
 .pulldown select {
     -moz-appearance: none;
     -webkit-appearance: none;
-    background: url(/img/btn.png) no-repeat right;
+    background: url(../img/btn.png) no-repeat right;
     border-top: 1px solid #1B73BA;
     border-bottom: 1px solid #1B73BA;
     border-left: 1px solid #1B73BA;
