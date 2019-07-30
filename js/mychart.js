@@ -8,16 +8,10 @@ const CreateLabels = (n,m) =>{
     return labels;
 };
 
-let timer;
-let i = 0;
-
 const func = x =>{
     return Math.pow(x, 3.0) + x - 1.0;
 };
 
-let [centers, dotes] = nibun(-10.0,10.0,func);
-
-const labels = CreateLabels(-10.0,10.0);
 const chartData = (center, dot1, dot2) =>{
     const labe = CreateLabels(dot1,dot2);
     let data = new Array();
@@ -26,7 +20,7 @@ const chartData = (center, dot1, dot2) =>{
     }
     console.group("sec");
     console.log(labe);
-    console.log(data);
+    console.log(`dot1:${dot1}   dot2:${dot2}`);
     console.log(`center:${center},${func(center)}`);
     console.groupEnd();
 
@@ -57,6 +51,13 @@ const chartData = (center, dot1, dot2) =>{
 
 };
 
+
+let timer;
+let i = 0;
+
+let [centers, dotes] = nibun(-10.0,10.0,func);
+
+const labels = CreateLabels(-10.0,10.0);
 const ManageLine = function () {
     ChartsDisplay(chartData(centers[i],dotes[i][0],dotes[i][1]));
     if (i >= labels.length) clearInterval(timer);
