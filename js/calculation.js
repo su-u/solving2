@@ -11,7 +11,7 @@ const nibun = (a, b, func) => {
         if (func(c) * func(a) < 0) b = c;
         // 式(1.2)
         else a = c; // 式(1.3)
-        dotes.push(c);
+        centers.push(c);
         count += 1;
     } while (Math.abs(a - b) > EPS); // 収束判別　式(1.4)の変形
     return [centers,dotes];
