@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --exit --reporter spec"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/su-u/solving2/issues"
   },
-  "homepage": "https://github.com/su-u/solving2#readme"
+  "homepage": "https://github.com/su-u/solving2#readme",
+  "dependencies": {
+    "mocha": "^6.2.0"
+  }
 }
