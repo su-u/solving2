@@ -1,6 +1,11 @@
-const Data = {
-    labels: [-10, -9, -8, -7, -6, -5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-    data: [1, 1, 1, 1, 1, 1, 1, 1]
+const CreateLabels = (n,m) =>{
+    const diff = Math.abs(n - m);
+    const diff_n = diff / 10;
+    let labels = new Array();
+    for (let i = 0; i < 11; i++) {
+        labels.push(n + (diff_n * i) )
+    }
+    return labels;
 };
 
 let data = new Array();
@@ -13,15 +18,13 @@ const func = x =>{
 
 let dot = nibun(0.0,1.0,func);
 
-console.log(dot);
-for (let j = 0; j < Data.labels.length; j++) {
-    data.push(func(Data.labels[j]));
+const labels = CreateLabels(-5,5);
+for (let j = 0; j < labels.length; j++) {
+    data.push(func(labels[j]));
 }
-console.log(data);
-
 const chartData = (data) =>{
     return  {
-        labels: Data.labels,
+        labels: CreateLabels(-5,5),
         datasets: [{
             type: "line",
             label: 'sample1',
@@ -38,8 +41,8 @@ const chartData = (data) =>{
 };
 
 const ManageLine = function () {
-    loadCharts(chartData(data));
-    if (i >= Data.labels.length) clearInterval(timer);
+    ChartsDisplay(chartData(data));
+    if (i >= labels.length) clearInterval(timer);
     i++;
 };
 
@@ -49,3 +52,7 @@ const start = function () {
 window.onload = function () {
     ChartsDisplay(chartData);
 };
+
+console.log(data);
+console.log(dot);
+console.log(labels);
