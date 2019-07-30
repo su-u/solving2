@@ -5,14 +5,24 @@ const ChartsDisplay = (data) => {
         options: {
             animation: {
                 duration: 0,
+            },
+            tooltips: {
+                mode: 'point'
             }
         }
     };
 
     const ctx = document.getElementById("mycanvas")
         .getContext("2d");
-    ctx.canvas.parentNode.style.height = '90%';
-    ctx.canvas.parentNode.style.width = '70%';
-    const myChart = new Chart(ctx, chartDataSet);
+    ctx.canvas.parentNode.style.height = '100%';
+    ctx.canvas.parentNode.style.width = '80%';
+    let myChart;
+    if (! myChart) {
+        myChart = new Chart(ctx, chartDataSet);
+    } else {
+        //データのみ更新
+        myChart.data.datasets = chartDataSet.data.datasets;
+        myChart.update();
+    }
 };
 
