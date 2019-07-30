@@ -10,25 +10,41 @@
 </head>
 
 <body>
-<div class="container right">
+<div class="container">
     <div class="row">
         <!-- chart area -->
         <div class="col-sm-6">
             <div class="canvas">
-                <canvas id="mycanvas" style="width: 70%;"></canvas>
+                <canvas id="mycanvas"></canvas>
             </div>
             <div id="chart-area">
             </div>
         </div>
     </div>
+
     <div class="pulldown">
         <select name="example1">
             <option value="formula1">x^2</option>
             <option value="formula2">x</option>
         </select>
     </div>
-    <div><input class="button" type="button" value="Exec" onclick="start();" /><br /></div>
+    <div>
+        <input class="button" type="button" value="Exec" onclick="start();" />
+        <input class="button" type="button" value="Reset" onclick="reset();" />
+    </div>
 </div>
+    <div class="container">
+        <table id="table-cal">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>左値</th>
+                <th>中央値</th>
+                <th>右値</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
     <!-- scripts -->
     <script src="js/chartDisplay.js"></script>
     <script src="js/calculation.js"></script>

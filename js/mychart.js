@@ -8,10 +8,6 @@ const CreateLabels = (n,m) =>{
     return labels;
 };
 
-const func = x =>{
-    return Math.pow(x, 3.0) + x - 1.0;
-};
-
 const chartData = (center, dot1, dot2) =>{
     const labe = CreateLabels(dot1,dot2);
     let data = new Array();
@@ -48,12 +44,15 @@ const chartData = (center, dot1, dot2) =>{
             borderColor: 'rgba(60, 160, 220, 0.8)'
         }
     ]}
-
 };
 
+const func = x =>{
+    return Math.pow(x, 3.0) + x - 1.0;
+};
 
 let timer;
 let i = 0;
+
 
 let [centers, dotes] = nibun(-10.0,10.0,func);
 
@@ -64,10 +63,32 @@ const ManageLine = function () {
     i++;
 };
 
-const start = function () {
+const start = () =>{
+    const table = document.getElementById("table-cal");
+    for (let j = 0; j < centers.length; j++) {
+        const row = table.insertRow( -1 );
+        let cell1 = row.insertCell(-1);
+        let cell2 = row.insertCell(-1);
+        let cell3 = row.insertCell(-1);
+        let cell4 = row.insertCell(-1);
+
+        cell1.innerHTML = j + 1;
+        cell2.innerHTML = dotes[j][0];
+        cell3.innerHTML = centers[j];
+        cell4.innerHTML = dotes[j][1];
+    }
+
     i = 0;
     timer = setInterval("ManageLine()", 1000);
 };
+
+const reset = () =>{
+    clearInterval(timer);
+    const table = document.getElementById("table-cal");
+    while( table.rows[ 1 ] ) table.deleteRow( 1 );
+    ChartsDisplay(chartData);
+};
+
 window.onload = function () {
     ChartsDisplay(chartData);
 };
