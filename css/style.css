@@ -9,7 +9,7 @@
     font-size: 14px;
     transition: .2s all;
     height: 40px;
-    width: 150px;
+    width: 200px;
 }
 .button:hover{
     border: 2px solid #1B73BA;
@@ -22,7 +22,6 @@
 
 .pulldown {
     /* display: flex; */
-    padding-bottom: 20px;
     position: relative;
 }
 .pulldown select {
