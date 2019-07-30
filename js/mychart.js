@@ -3,7 +3,7 @@ const CreateLabels = (n,m) =>{
     const diff_n = diff / 10.0;
     let labels = new Array();
     for (let i = 0; i < 11; i++) {
-        labels.push(n + (diff_n * i) )
+        labels.push(n + (diff_n * i) );
     }
     return labels;
 };
@@ -15,9 +15,9 @@ const func = x =>{
     return Math.pow(x, 3.0) + x - 1.0;
 };
 
-let [centers, dotes] = nibun(0.0,1.0,func);
+let [centers, dotes] = nibun(-10.0,10.0,func);
 
-const labels = CreateLabels(-10,10);
+const labels = CreateLabels(-10.0,10.0);
 const chartData = (center, dot1, dot2) =>{
     const labe = CreateLabels(dot1,dot2);
     let data = new Array();
@@ -27,7 +27,7 @@ const chartData = (center, dot1, dot2) =>{
     console.group("sec");
     console.log(labe);
     console.log(data);
-    console.log(`center:${center}`);
+    console.log(`center:${center},${func(center)}`);
     console.groupEnd();
 
     return  {
@@ -54,6 +54,7 @@ const chartData = (center, dot1, dot2) =>{
             borderColor: 'rgba(60, 160, 220, 0.8)'
         }
     ]}
+
 };
 
 const ManageLine = function () {
