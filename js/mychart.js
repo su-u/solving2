@@ -1,3 +1,21 @@
+const getFunc = () =>{
+    const func1 = x =>{
+        return Math.pow(x, 3.0) + x - 1.0;
+};
+    const func2 = x =>{
+        return Math.pow(x, 3.0) + x - 10.0;
+    };
+
+    const funcs = [func1,func1,func2];
+    return funcs[getSelectNum()];
+};
+
+const getRange = () =>{
+    const range = [[-10.0,10.0],[-10.0,0],[-10.0,10.0]];
+    console.log(range[getSelectNum()]);
+    return range[getSelectNum()];
+};
+
 const chartData = (center, dot1, dot2) =>{
     const labe = CreateLabels(dot1,dot2);
     let data = new Array();
@@ -36,15 +54,15 @@ const chartData = (center, dot1, dot2) =>{
     ]}
 };
 
-const func = x =>{
-    return Math.pow(x, 3.0) + x - 1.0;
-};
+
+
+
 
 let timer;
 let i = 0;
 
-
-let [centers, dotes] = nibun(0.0,10.0,func);
+const [range1, range2] = getRange();
+const [centers, dotes] = nibun(range1,range2,getFunc());
 
 const labels = CreateLabels(0.0,10.0);
 const ManageLine = function () {
