@@ -1,13 +1,3 @@
-const CreateLabels = (n,m) =>{
-    const diff = Math.abs(m-n);
-    const diff_n = diff / 10.0;
-    let labels = new Array();
-    for (let i = 0; i < 11; i++) {
-        labels.push(n + (diff_n * i) );
-    }
-    return labels;
-};
-
 const chartData = (center, dot1, dot2) =>{
     const labe = CreateLabels(dot1,dot2);
     let data = new Array();
@@ -54,9 +44,9 @@ let timer;
 let i = 0;
 
 
-let [centers, dotes] = nibun(-10.0,10.0,func);
+let [centers, dotes] = nibun(0.0,10.0,func);
 
-const labels = CreateLabels(-10.0,10.0);
+const labels = CreateLabels(0.0,10.0);
 const ManageLine = function () {
     ChartsDisplay(chartData(centers[i],dotes[i][0],dotes[i][1]));
     if (i >= labels.length) clearInterval(timer);
@@ -92,7 +82,3 @@ const reset = () =>{
 window.onload = function () {
     ChartsDisplay(chartData);
 };
-
-console.log(centers);
-console.log(dotes);
-console.log(labels);
