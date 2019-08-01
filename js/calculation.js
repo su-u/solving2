@@ -13,7 +13,7 @@ const nibun = (a, b, func) => {
         else a = c; // 式(1.3)
         centers.push(c);
         count += 1;
-    } while (Math.abs(a - b) > EPS); // 収束判別　式(1.4)の変形
+    } while (Math.abs(a - b) > EPS);
     return [centers,dotes];
 };
 

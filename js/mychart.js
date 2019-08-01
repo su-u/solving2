@@ -13,14 +13,12 @@ const getFunc = () =>{
 const getRange = () =>{
     const num = getSelectNum();
     const range = [[-10.0, 10.0],[-10.0, 0.0],[-10.0,10.0]];
-    console.log(range[num]);
     return [range[num][0], range[num][1]];
 };
 
 const baseLine = (min, max, func) =>{
     if(min > max) throw new RangeError("minが小さい必要あり");
     let data = [];
-    console.log(min,max);
     for (let j = min; j < max; j+= 0.01) {
         data.push({x:j,y:func(j)});
     }
@@ -78,10 +76,10 @@ let i = 0;
 let chart;
 let isExec = false;
 
-const [range1, range2] = getRange();
-const [centers, dotes] = nibun(range1, range2, getFunc());
 
 const ManageLine = function () {
+    const [range1, range2] = getRange();
+    const [centers, dotes] = nibun(range1, range2, getFunc());
     chart = createChart(-10.0, 10, getFunc(), centers[i], dotes[i][0], dotes[i][1]);
     chart.render();
 
@@ -96,12 +94,12 @@ const ManageLine = function () {
     cell2.innerHTML = centers[i];
     cell3.innerHTML = dotes[i][1];
 
-    if (i >= centers.length) {
-        clearInterval(timer);
-        const cell4 = row.insertCell(-1);
-        cell4.innerHTML = centers[i];
-    }
     i++;
+    if (i >= centers.length || i >= dotes.length) {
+        const cell4 = row.insertCell(-1);
+        cell4.innerHTML = centers[i - 1];
+        clearInterval(timer);
+    }
 };
 
 const start = () =>{
@@ -109,7 +107,7 @@ const start = () =>{
         reset();
         isExec = true;
         i = 0;
-        timer = setInterval("ManageLine()", 1000);
+        timer = setInterval("ManageLine()", 500);
     }
 };
 
