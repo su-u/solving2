@@ -17,16 +17,18 @@ const getRange = () =>{
     return [range[num][0], range[num][1]];
 };
 
-    const baseLine = (func) =>{
-        let data = [];
-        for (let j = -10.0; j < 11; j+= 0.01) {
-            data.push({x:j,y:func(j)});
-        }
-        console.log(data);
+const baseLine = (min, max, func) =>{
+    if(min > max) throw new RangeError("minが小さい必要あり");
+    let data = [];
+    console.log(min,max);
+    for (let j = min; j < max; j+= 0.01) {
+        data.push({x:j,y:func(j)});
+    }
+    console.log(data);
     return data;
 };
 
-const createChart = () => {
+const createChart = (min, max, func, center, dot1, dot2) => {
     return new CanvasJS.Chart("chartContainer", {
         zoomEnabled: true,
         zoomType: "xy",
@@ -55,9 +57,22 @@ const createChart = () => {
         },
         data: [{
             type: "line",
-            name: "Type 1 Filter",
+            name: "func",
+            dataPoints: baseLine(min, max, func)
+            }, {
+            type: "line",
+            name: "X",
             showInLegend: true,
-            dataPoints: baseLine(getFunc())
+            dataPoints: [
+                {x:dot1,y:func(dot1)},
+                {x:dot2, y:func(dot2)}]
+            }, {
+            type: "line",
+            name: "Center",
+            color: "#39a64f",
+            showInLegend: true,
+            dataPoints: [
+                {x:center,y:func(center)}]
         }]
     });
 };
@@ -72,7 +87,7 @@ const [centers, dotes] = nibun(range1, range2, getFunc());
 
 const labels = CreateLabels(0.0,10.0);
 const ManageLine = function () {
-    chart = createChart(getFunc());
+    chart = createChart(range1, range2, getFunc(), centers[i], dotes[i][0], dotes[i][1]);
     chart.render();
     if (i >= labels.length) clearInterval(timer);
     i++;
@@ -114,5 +129,5 @@ function toogleDataSeries(e){
 
 
 window.onload =()=> {
-    createChart().render();
+    createChart(-10.0, 10.0, getFunc()).render();
 };
