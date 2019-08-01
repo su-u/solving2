@@ -17,54 +17,70 @@ const getRange = () =>{
     return [range[num][0], range[num][1]];
 };
 
-const chartData = (center, dot1, dot2, func) =>{
-    const labe = CreateLabels(dot1,dot2);
-    let data = new Array();
-    for (let j = 0; j < labe.length; j++) {
-        data.push(func(labe[j]));
-    }
-    console.group("sec");
-    console.log(labe);
-    console.log(`dot1:${dot1}   dot2:${dot2}`);
-    console.log(`center:${center},${func(center)}`);
-    console.groupEnd();
-
-    return  {
-        labels: labe,
-        datasets: [{
-            type: "line",
-            label: 'dot',
-            data: [{x:dot1, y:func(dot1)},{x:dot2,y:func(dot2)}],
-            borderColor: 'rgba(57,166,79, 0.8)',
-            backdropColor:'rgba(0,0,0,0)',
-            pointRadius: 10,
-        },{
-            type: "line",
-            label: 'center',
-            data: [{x:center,y:func(center)}],
-            backgroundColor: 'rgba(200, 100, 100, 1.0)',
-            pointRadius: 10,
-        },
-        {
-            type: "line",
-            label: 'line',
-            data: data,
-            backgroundColor: 'rgba(0, 0, 0, 0.0)',
-            borderColor: 'rgba(60, 160, 220, 0.8)'
+    const baseLine = (func) =>{
+        let data = [];
+        for (let j = -10.0; j < 11; j+= 0.01) {
+            data.push({x:j,y:func(j)});
         }
-    ]}
+        console.log(data);
+    return data;
+};
+
+const createChart = () => {
+    return new CanvasJS.Chart("chartContainer", {
+        zoomEnabled: true,
+        zoomType: "xy",
+        exportEnabled: true,
+        title: {
+            text: "Frequency Response of Low Pass Filters"
+        },
+        subtitles:[{
+            text: "X Axis scale is Logarithmic",
+            fontSize: 14
+        }],
+        axisY: {
+            title: "Type 1 Magnitude (db)",
+            titleFontColor: "#4F81BC",
+            labelFontColor: "#4F81BC"
+        },
+        axisX: {
+            title: "Frequency \u03C9(rad/s)",
+
+            suffix: "\u03C9\u2099",
+        },
+        axisY: {
+            title: "Type 1 Magnitude (db)",
+            titleFontColor: "#4F81BC",
+            labelFontColor: "#4F81BC"
+        },
+        toolTip: {
+            shared: true
+        },
+        legend:{
+            cursor:"pointer",
+            itemclick: toogleDataSeries
+        },
+        data: [{
+            type: "line",
+            name: "Type 1 Filter",
+            showInLegend: true,
+            dataPoints: baseLine(getFunc())
+        }]
+    });
 };
 
 
 let timer;
 let i = 0;
+let chart;
 
 const [range1, range2] = getRange();
 const [centers, dotes] = nibun(range1, range2, getFunc());
 
 const labels = CreateLabels(0.0,10.0);
 const ManageLine = function () {
-    ChartsDisplay(chartData(centers[i],dotes[i][0],dotes[i][1], getFunc()));
+    chart = createChart(getFunc());
+    chart.render();
     if (i >= labels.length) clearInterval(timer);
     i++;
 };
@@ -92,9 +108,18 @@ const reset = () =>{
     clearInterval(timer);
     const table = document.getElementById("table-cal");
     while( table.rows[ 1 ] ) table.deleteRow( 1 );
-    ChartsDisplay(chartData);
 };
 
-window.onload = function () {
-    ChartsDisplay(chartData);
+function toogleDataSeries(e){
+    if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+        e.dataSeries.visible = false;
+    } else{
+        e.dataSeries.visible = true;
+    }
+    chart.render();
+}
+
+
+window.onload =()=> {
+    createChart().render();
 };
