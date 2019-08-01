@@ -1,64 +1,94 @@
-const CreateLabels = (n,m) =>{
-    const diff = Math.abs(m-n);
-    const diff_n = diff / 10.0;
-    let labels = new Array();
-    for (let i = 0; i < 11; i++) {
-        labels.push(n + (diff_n * i) );
-    }
-    return labels;
+const getFunc = () =>{
+    const func1 = x =>{
+        return Math.pow(x, 3.0) + x - 1.0;
+};
+    const func2 = x =>{
+        return Math.pow(x, 3.0) + x - 10.0;
+    };
+
+    const funcs = [func1, func1, func2];
+    return funcs[getSelectNum()];
 };
 
-const chartData = (center, dot1, dot2) =>{
-    const labe = CreateLabels(dot1,dot2);
-    let data = new Array();
-    for (let j = 0; j < labe.length; j++) {
-        data.push(func(labe[j]));
-    }
-    console.group("sec");
-    console.log(labe);
-    console.log(`dot1:${dot1}   dot2:${dot2}`);
-    console.log(`center:${center},${func(center)}`);
-    console.groupEnd();
+const getRange = () =>{
+    const num = getSelectNum();
+    const range = [[-10.0,10.0],[-10.0,0.0],[-10.0,10.0]];
+    console.log(range[num]);
+    return [range[num][0], range[num][1]];
+};
 
-    return  {
-        labels: labe,
-        datasets: [{
-            type: "line",
-            label: 'dot',
-            data: [{x:dot1, y:func(dot1)},{x:dot2,y:func(dot2)}],
-            borderColor: 'rgba(57,166,79, 0.8)',
-            backdropColor:'rgba(0,0,0,0)',
-            pointRadius: 10,
-        },{
-            type: "line",
-            label: 'center',
-            data: [{x:center,y:func(center)}],
-            backgroundColor: 'rgba(200, 100, 100, 1.0)',
-            pointRadius: 10,
+const baseLine = (min, max, func) =>{
+    if(min > max) throw new RangeError("minが小さい必要あり");
+    let data = [];
+    console.log(min,max);
+    for (let j = min; j < max; j+= 0.01) {
+        data.push({x:j,y:func(j)});
+    }
+    console.log(data);
+    return data;
+};
+
+const createChart = (min, max, func, center, dot1, dot2) => {
+    return new CanvasJS.Chart("chartContainer", {
+        zoomEnabled: true,
+        zoomType: "xy",
+        exportEnabled: true,
+        title: {
+            text: "Frequency Response of Low Pass Filters"
         },
-        {
+        subtitles:[{
+            text: "X Axis scale is Logarithmic",
+            fontSize: 14
+        }],
+        axisX: {
+            title: "X",
+        },
+        axisY: {
+            title: "Y",
+            titleFontColor: "#4F81BC",
+            labelFontColor: "#4F81BC"
+        },
+        toolTip: {
+            shared: true
+        },
+        legend:{
+            cursor:"pointer",
+            itemclick: toogleDataSeries
+        },
+        data: [{
             type: "line",
-            label: 'line',
-            data: data,
-            backgroundColor: 'rgba(0, 0, 0, 0.0)',
-            borderColor: 'rgba(60, 160, 220, 0.8)'
-        }
-    ]}
+            name: "func",
+            dataPoints: baseLine(min, max, func)
+            }, {
+            type: "line",
+            name: "X",
+            showInLegend: true,
+            dataPoints: [
+                {x:dot1,y:func(dot1)},
+                {x:dot2, y:func(dot2)}]
+            }, {
+            type: "line",
+            name: "Center",
+            color: "#39a64f",
+            showInLegend: true,
+            dataPoints: [
+                {x:center,y:func(center)}]
+        }]
+    });
 };
 
-const func = x =>{
-    return Math.pow(x, 3.0) + x - 1.0;
-};
 
 let timer;
 let i = 0;
+let chart;
 
+const [range1, range2] = getRange();
+const [centers, dotes] = nibun(range1, range2, getFunc());
 
-let [centers, dotes] = nibun(-10.0,10.0,func);
-
-const labels = CreateLabels(-10.0,10.0);
+const labels = CreateLabels(0.0,10.0);
 const ManageLine = function () {
-    ChartsDisplay(chartData(centers[i],dotes[i][0],dotes[i][1]));
+    chart = createChart(range1, range2, getFunc(), centers[i], dotes[i][0], dotes[i][1]);
+    chart.render();
     if (i >= labels.length) clearInterval(timer);
     i++;
 };
@@ -86,13 +116,18 @@ const reset = () =>{
     clearInterval(timer);
     const table = document.getElementById("table-cal");
     while( table.rows[ 1 ] ) table.deleteRow( 1 );
-    ChartsDisplay(chartData);
 };
 
-window.onload = function () {
-    ChartsDisplay(chartData);
-};
+function toogleDataSeries(e){
+    if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+        e.dataSeries.visible = false;
+    } else{
+        e.dataSeries.visible = true;
+    }
+    chart.render();
+}
 
-console.log(centers);
-console.log(dotes);
-console.log(labels);
+
+window.onload =()=> {
+    createChart(-10.0, 10.0, getFunc()).render();
+};

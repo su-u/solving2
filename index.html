@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Charts</title>
     <link rel="stylesheet" href="css/style.css" type="text/css">
+
 </head>
 
 <body>
@@ -14,18 +15,15 @@
     <div class="row">
         <!-- chart area -->
         <div class="col-sm-6">
-            <div class="canvas">
-                <canvas id="mycanvas"></canvas>
-            </div>
-            <div id="chart-area">
-            </div>
+            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
         </div>
     </div>
 
     <div class="pulldown">
-        <select name="example1">
-            <option value="formula1">x^2</option>
-            <option value="formula2">x</option>
+        <select id="num" name="func">
+            <option value="0">x^3 + x - 1.0 (-10.0~10.0)</option>
+            <option value="1">x^3 + x - 1.0 (-10.0~0.0)</option>
+            <option value="2">x^3 + x - 10.0 (-10.0~10.0)</option>
         </select>
     </div>
     <div>
@@ -46,9 +44,10 @@
         </table>
     </div>
     <!-- scripts -->
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <script src="js/createLabels.js"></script>
     <script src="js/chartDisplay.js"></script>
     <script src="js/calculation.js"></script>
-    <script src="js/Chart.bundle.min.js"></script>
     <script src="js/mychart.js"></script>
 </body>
 
