@@ -6,17 +6,18 @@ const getFunc = () =>{
         return Math.pow(x, 3.0) + x - 10.0;
     };
 
-    const funcs = [func1,func1,func2];
+    const funcs = [func1, func1, func2];
     return funcs[getSelectNum()];
 };
 
 const getRange = () =>{
-    const range = [[-10.0,10.0],[-10.0,0],[-10.0,10.0]];
-    console.log(range[getSelectNum()]);
-    return range[getSelectNum()];
+    const num = getSelectNum();
+    const range = [[-10.0,10.0],[-10.0,0.0],[-10.0,10.0]];
+    console.log(range[num]);
+    return [range[num][0], range[num][1]];
 };
 
-const chartData = (center, dot1, dot2) =>{
+const chartData = (center, dot1, dot2, func) =>{
     const labe = CreateLabels(dot1,dot2);
     let data = new Array();
     for (let j = 0; j < labe.length; j++) {
@@ -55,18 +56,15 @@ const chartData = (center, dot1, dot2) =>{
 };
 
 
-
-
-
 let timer;
 let i = 0;
 
 const [range1, range2] = getRange();
-const [centers, dotes] = nibun(range1,range2,getFunc());
+const [centers, dotes] = nibun(range1, range2, getFunc());
 
 const labels = CreateLabels(0.0,10.0);
 const ManageLine = function () {
-    ChartsDisplay(chartData(centers[i],dotes[i][0],dotes[i][1]));
+    ChartsDisplay(chartData(centers[i],dotes[i][0],dotes[i][1], getFunc()));
     if (i >= labels.length) clearInterval(timer);
     i++;
 };

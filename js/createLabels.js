@@ -9,9 +9,9 @@ const CreateLabels = (n,m) =>{
 };
 
 const getSelectNum = () =>{
-    const str = document.getElementsByName('func').value;
-    const num = parseInt(str);
-    if(isNaN(num)){
+    const str = document.getElementById('num').value;
+    const num = parseInt(str,10);
+    if(!isNaN(num)){
         return num
     }else {
         return 0;
