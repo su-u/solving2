@@ -81,6 +81,7 @@ const createChart = (min, max, func, center, dot1, dot2) => {
 let timer;
 let i = 0;
 let chart;
+let isExec = false;
 
 const [range1, range2] = getRange();
 const [centers, dotes] = nibun(range1, range2, getFunc());
@@ -89,30 +90,32 @@ const labels = CreateLabels(0.0,10.0);
 const ManageLine = function () {
     chart = createChart(range1, range2, getFunc(), centers[i], dotes[i][0], dotes[i][1]);
     chart.render();
+
+    const table = document.getElementById("table-cal");
+    while( table.rows[ 1 ] ) table.deleteRow( 1 );
+    const row = table.insertRow(-1);
+    let cell1 = row.insertCell(-1);
+    let cell2 = row.insertCell(-1);
+    let cell3 = row.insertCell(-1);
+
+    cell1.innerHTML = dotes[i][0];
+    cell2.innerHTML = centers[i];
+    cell3.innerHTML = dotes[i][1];
+
     if (i >= labels.length) clearInterval(timer);
     i++;
 };
 
 const start = () =>{
-    const table = document.getElementById("table-cal");
-    for (let j = 0; j < centers.length; j++) {
-        const row = table.insertRow( -1 );
-        let cell1 = row.insertCell(-1);
-        let cell2 = row.insertCell(-1);
-        let cell3 = row.insertCell(-1);
-        let cell4 = row.insertCell(-1);
-
-        cell1.innerHTML = j + 1;
-        cell2.innerHTML = dotes[j][0];
-        cell3.innerHTML = centers[j];
-        cell4.innerHTML = dotes[j][1];
+    if(!isExec) {
+        isExec = true;
+        i = 0;
+        timer = setInterval("ManageLine()", 1000);
     }
-
-    i = 0;
-    timer = setInterval("ManageLine()", 1000);
 };
 
 const reset = () =>{
+    isExec = false;
     clearInterval(timer);
     const table = document.getElementById("table-cal");
     while( table.rows[ 1 ] ) table.deleteRow( 1 );
