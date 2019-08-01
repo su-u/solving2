@@ -38,18 +38,11 @@ const createChart = () => {
             text: "X Axis scale is Logarithmic",
             fontSize: 14
         }],
-        axisY: {
-            title: "Type 1 Magnitude (db)",
-            titleFontColor: "#4F81BC",
-            labelFontColor: "#4F81BC"
-        },
         axisX: {
-            title: "Frequency \u03C9(rad/s)",
-
-            suffix: "\u03C9\u2099",
+            title: "X",
         },
         axisY: {
-            title: "Type 1 Magnitude (db)",
+            title: "Y",
             titleFontColor: "#4F81BC",
             labelFontColor: "#4F81BC"
         },
