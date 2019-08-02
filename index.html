@@ -11,44 +11,55 @@
 </head>
 
 <body>
-<div class="container">
-    <div class="row">
-        <!-- chart area -->
-        <div class="col-sm-6">
-            <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+<div class="tabs">
+    <input id="all" type="radio" name="tab_item" checked>
+    <label class="tab_item" for="all">二分法</label>
+    <input id="nyu" type="radio" name="tab_item">
+    <label class="tab_item" for="nyu">ニュートン法</label>
+
+   <div class="tab_content" id="all_content">
+        <div class="container">
+            <div class="row">
+                <!-- chart area -->
+                <div class="col-sm-6">
+                    <div id="chartContainer" style="height: 450px; width: 99%;position: absolute;top: 90px;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="container item">
+            <div class="pulldown">
+                <select id="num" name="func">
+                    <option value="0">x^3 + x - 1.0 (-10.0~10.0)</option>
+                    <option value="1">x^3 + x - 1.0 (-10.0~0.0)</option>
+                    <option value="2">x^3 + x - 10.0 (-10.0~10.0)</option>
+                </select>
+            </div>
+            <div>
+                <input class="button" type="button" value="Exec" onclick="start();"/>
+                <input class="button" type="button" value="Reset" onclick="reset();"/>
+            </div>
+            <table id="table-cal">
+                <thead>
+                <tr>
+                    <th>左値</th>
+                    <th>中央値</th>
+                    <th>右値</th>
+                    <th>近似値</th>
+                </tr>
+                </thead>
+            </table>
         </div>
     </div>
-
-    <div class="pulldown">
-        <select id="num" name="func">
-            <option value="0">x^3 + x - 1.0 (-10.0~10.0)</option>
-            <option value="1">x^3 + x - 1.0 (-10.0~0.0)</option>
-            <option value="2">x^3 + x - 10.0 (-10.0~10.0)</option>
-        </select>
-    </div>
-    <div>
-        <input class="button" type="button" value="Exec" onclick="start();" />
-        <input class="button" type="button" value="Reset" onclick="reset();" />
+    <div class="tab_content" id="nyu_content">
+        aaa
     </div>
 </div>
-    <div class="container">
-        <table id="table-cal">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>左値</th>
-                <th>中央値</th>
-                <th>右値</th>
-            </tr>
-            </thead>
-        </table>
-    </div>
-    <!-- scripts -->
+<!-- scripts -->
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-    <script src="js/createLabels.js"></script>
-    <script src="js/chartDisplay.js"></script>
-    <script src="js/calculation.js"></script>
-    <script src="js/mychart.js"></script>
+<script src="js/createLabels.js"></script>
+<script src="js/chartDisplay.js"></script>
+<script src="js/calculation.js"></script>
+<script src="js/mychart.js"></script>
 </body>
 
 </html>
