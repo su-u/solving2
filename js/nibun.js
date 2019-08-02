@@ -43,18 +43,18 @@ const createChart = (min, max, func, center, dot1, dot2) => {
 };
 
 
-let timer;
-let i = 0;
-let chart;
-let isExec = false;
+let timerNibun;
+let iNibun = 0;
+let chartNibun;
+let isExecNibun = false;
 
 
-const ManageLine = function () {
+const ManageLineNibun = function () {
     const func = getFunc();
     const [range1, range2] = getRange();
     const [centers, dotes] = nibun(range1, range2, func);
-    chart = createChart(-10.0, 10.0, func, centers[i], dotes[i][0], dotes[i][1]);
-    chart.render();
+    chartNibun = createChart(-10.0, 10.0, func, centers[iNibun], dotes[iNibun][0], dotes[iNibun][1]);
+    chartNibun.render();
 
     const table = document.getElementById("table-cal-nibun");
     while( table.rows[ 1 ] ) table.deleteRow( 1 );
@@ -63,33 +63,33 @@ const ManageLine = function () {
     const cell2 = row.insertCell(-1);
     const cell3 = row.insertCell(-1);
 
-    cell1.innerHTML = dotes[i][0];
-    cell2.innerHTML = centers[i];
-    cell3.innerHTML = dotes[i][1];
+    cell1.innerHTML = dotes[iNibun][0];
+    cell2.innerHTML = centers[iNibun];
+    cell3.innerHTML = dotes[iNibun][1];
 
-    i++;
-    if (i >= centers.length || i >= dotes.length) {
+    iNibun++;
+    if (iNibun >= centers.length || iNibun >= dotes.length) {
         const cell4 = row.insertCell(-1);
         const cell5 = row.insertCell(-1);
-        cell4.innerHTML = centers[i - 1];
-        cell5.innerHTML = Math.abs(0-func(centers[i-1])*(-1));
-        clearInterval(timer);
-        isExec = false;
+        cell4.innerHTML = centers[iNibun - 1];
+        cell5.innerHTML = Math.abs(0-func(centers[iNibun-1])*(-1));
+        clearInterval(timerNibun);
+        isExecNibun = false;
     }
 };
 
-const start = () =>{
-    if(!isExec) {
-        reset();
-        isExec = true;
-        i = 0;
-        timer = setInterval("ManageLine()", 500);
+const startNibun = () =>{
+    if(!isExecNibun) {
+        resetNibun();
+        isExecNibun = true;
+        iNibun = 0;
+        timerNibun = setInterval("ManageLineNibun()", 500);
     }
 };
 
-const reset = () =>{
-    isExec = false;
-    clearInterval(timer);
+const resetNibun = () =>{
+    isExecNibun = false;
+    clearInterval(timerNibun);
     const table = document.getElementById("table-cal-nibun");
     while( table.rows[ 1 ] ) table.deleteRow( 1 );
 };
