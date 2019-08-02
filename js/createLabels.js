@@ -23,7 +23,7 @@ const getFunc = () =>{
         return Math.pow(x, 3.0) + x - 1.0;
     };
     const func2 = x =>{
-        return Math.pow(x, 3.0) + x - 10.0;
+        return (Math.pow(x, 3.0) + Math.pow(x, 2.0) - 30.0) * (-1);
     };
 
     const funcs = [func1, func1, func2];
@@ -31,8 +31,8 @@ const getFunc = () =>{
 };
 
 const getRange = () =>{
+    const range = [[-10.0, 10.0],[-10.0, -5.0],[-5.0,5.0]];
     const num = getSelectNum();
-    const range = [[-10.0, 10.0],[-10.0, 0.0],[-10.0,10.0]];
     return [range[num][0], range[num][1]];
 };
 

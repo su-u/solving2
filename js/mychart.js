@@ -1,4 +1,3 @@
-
 const createChart = (min, max, func, center, dot1, dot2) => {
     return new CanvasJS.Chart("chartContainer", {
         zoomEnabled: true,
@@ -51,9 +50,10 @@ let isExec = false;
 
 
 const ManageLine = function () {
+    const func = getFunc();
     const [range1, range2] = getRange();
-    const [centers, dotes] = nibun(range1, range2, getFunc());
-    chart = createChart(-10.0, 10, getFunc(), centers[i], dotes[i][0], dotes[i][1]);
+    const [centers, dotes] = nibun(range1, range2, func);
+    chart = createChart(-10.0, 10.0, func, centers[i], dotes[i][0], dotes[i][1]);
     chart.render();
 
     const table = document.getElementById("table-cal");
@@ -70,8 +70,11 @@ const ManageLine = function () {
     i++;
     if (i >= centers.length || i >= dotes.length) {
         const cell4 = row.insertCell(-1);
+        const cell5 = row.insertCell(-1);
         cell4.innerHTML = centers[i - 1];
+        cell5.innerHTML = Math.abs(0-func(centers[i-1])*(-1));
         clearInterval(timer);
+        isExec = false;
     }
 };
 

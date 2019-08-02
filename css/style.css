@@ -51,11 +51,12 @@
     width: 250px;
 }
 table {
-    width: 60%;
+    width: 80%;
     max-width: 100%;
     margin-bottom: 1rem;
     background-color: transparent;
     font-size: 22px;
+    table-layout: fixed;
 }
 
 table thead th {
