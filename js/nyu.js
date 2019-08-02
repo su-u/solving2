@@ -1,5 +1,7 @@
 const createChartNyu = (min, max, func, center, dot1, dot2) => {
     return new CanvasJS.Chart("chartContainer-nyu", {
+        height:450,
+        width:window.innerWidth * 0.99,
         zoomEnabled: true,
         zoomType: "xy",
         exportEnabled: true,
@@ -92,9 +94,4 @@ const reset = () =>{
     clearInterval(timer);
     const table = document.getElementById("table-cal-nyu");
     while( table.rows[ 1 ] ) table.deleteRow( 1 );
-};
-
-
-window.onload =()=> {
-    createChartNyu(-10.0, 10.0, getFunc()).render();
 };

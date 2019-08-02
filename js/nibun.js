@@ -1,5 +1,7 @@
 const createChartNibun = (min, max, func, center, dot1, dot2) => {
     return new CanvasJS.Chart("chartContainer-nibun", {
+        height:450,
+        width:window.innerWidth * 0.99,
         zoomEnabled: true,
         zoomType: "xy",
         exportEnabled: true,
