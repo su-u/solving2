@@ -34,8 +34,8 @@
                 </select>
             </div>
             <div>
-                <input class="button" type="button" value="Exec" onclick="start();"/>
-                <input class="button" type="button" value="Reset" onclick="reset();"/>
+                <input class="button" type="button" value="Exec" onclick="startNibun();"/>
+                <input class="button" type="button" value="Reset" onclick="resetNibun();"/>
             </div>
             <table id="table-cal-nibun">
                 <thead>
@@ -61,15 +61,15 @@
         </div>
         <div class="container item">
             <div class="pulldown">
-                <select id="num" name="func">
+                <select id="num-nyu" name="func">
                     <option value="0">x^3 + x - 1.0 (-10.0~10.0)</option>
                     <option value="1">x^3 + x - 1.0 (-10.0~0.0)</option>
                     <option value="2">-(x^3 + x^2 - 30.0) (-10.0~10.0)</option>
                 </select>
             </div>
             <div>
-                <input class="button" type="button" value="Exec" onclick="start();"/>
-                <input class="button" type="button" value="Reset" onclick="reset();"/>
+                <input class="button" type="button" value="Exec" onclick="startNyu();"/>
+                <input class="button" type="button" value="Reset" onclick="resetNyu();"/>
             </div>
             <table id="table-cal-nyu">
                 <thead>
@@ -90,6 +90,7 @@
 <script src="js/createLabels.js"></script>
 <script src="js/chartDisplay.js"></script>
 <script src="js/calculation.js"></script>
+<script src="js/nyu.js"></script>
 <script src="js/nibun.js"></script>
 </body>
 

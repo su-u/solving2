@@ -1,4 +1,4 @@
-const createChart = (min, max, func, center, dot1, dot2) => {
+const createChartNibun = (min, max, func, center, dot1, dot2) => {
     return new CanvasJS.Chart("chartContainer-nibun", {
         zoomEnabled: true,
         zoomType: "xy",
@@ -53,7 +53,7 @@ const ManageLineNibun = function () {
     const func = getFunc();
     const [range1, range2] = getRange();
     const [centers, dotes] = nibun(range1, range2, func);
-    chartNibun = createChart(-10.0, 10.0, func, centers[iNibun], dotes[iNibun][0], dotes[iNibun][1]);
+    chartNibun = createChartNibun(-10.0, 10.0, func, centers[iNibun], dotes[iNibun][0], dotes[iNibun][1]);
     chartNibun.render();
 
     const table = document.getElementById("table-cal-nibun");
@@ -72,7 +72,7 @@ const ManageLineNibun = function () {
         const cell4 = row.insertCell(-1);
         const cell5 = row.insertCell(-1);
         cell4.innerHTML = centers[iNibun - 1];
-        cell5.innerHTML = Math.abs(0-func(centers[iNibun-1])*(-1));
+        cell5.innerHTML = Math.abs(0 - func(centers[iNibun-  1]) * (-1));
         clearInterval(timerNibun);
         isExecNibun = false;
     }
@@ -92,9 +92,4 @@ const resetNibun = () =>{
     clearInterval(timerNibun);
     const table = document.getElementById("table-cal-nibun");
     while( table.rows[ 1 ] ) table.deleteRow( 1 );
-};
-
-
-window.onload =()=> {
-    createChart(-10.0, 10.0, getFunc()).render();
 };
