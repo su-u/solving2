@@ -26,6 +26,7 @@
 .item{
     position: relative;
     top:500px;
+    z-index: 1;
 }
 
 .pulldown {
@@ -84,12 +85,11 @@ table tbody tr td img.icon {
 
 
 .tabs {
-    margin-top: 50px;
-    padding-bottom: 40px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     width: 100%;
-    margin: 0 auto;
+    z-index: -1;
+    padding-bottom: 560px;
 }
 
 .tab_item {
@@ -125,7 +125,7 @@ input[name="tab_item"] {
 
 
 #all:checked ~ #all_content,
-#ny:checked ~ #nyu_content{
+#nyu:checked ~ #nyu_content {
     display: block;
 }
 
