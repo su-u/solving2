@@ -65,16 +65,16 @@ const ManageLineNibun = function () {
     const cell2 = row.insertCell(-1);
     const cell3 = row.insertCell(-1);
 
-    cell1.innerHTML = dotes[iNibun][0];
-    cell2.innerHTML = centers[iNibun];
-    cell3.innerHTML = dotes[iNibun][1];
+    cell1.innerHTML = dotes[iNibun][0].toFixed(10);
+    cell2.innerHTML = centers[iNibun].toFixed(10);
+    cell3.innerHTML = dotes[iNibun][1].toFixed(10);
 
     iNibun++;
     if (iNibun >= centers.length || iNibun >= dotes.length) {
         const cell4 = row.insertCell(-1);
         const cell5 = row.insertCell(-1);
-        cell4.innerHTML = centers[iNibun - 1];
-        cell5.innerHTML = Math.abs(0 - func(centers[iNibun-  1]) * (-1));
+        cell4.innerHTML = centers[iNibun - 1].toFixed(10);
+        cell5.innerHTML = Math.abs(0 - func(centers[iNibun-  1]) * (-1)).toFixed(10);
         clearInterval(timerNibun);
         isExecNibun = false;
     }
