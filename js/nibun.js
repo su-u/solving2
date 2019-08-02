@@ -1,27 +1,27 @@
 const createChart = (min, max, func, center, dot1, dot2) => {
-    return new CanvasJS.Chart("chartContainer", {
+    return new CanvasJS.Chart("chartContainer-nibun", {
         zoomEnabled: true,
         zoomType: "xy",
         exportEnabled: true,
         title: {
             text: "二分法"
         },
-        axisX: {
-            title: "X",
-        },
-        axisY: {
-            title: "Y",
+            axisX: {
+        title: "X",
+    },
+    axisY: {
+        title: "Y",
             titleFontColor: "#4F81BC",
             labelFontColor: "#4F81BC"
-        },
-        toolTip: {
-            shared: true
-        },
-        legend:{
-            cursor:"pointer",
-        },
-        data: [{
-            type: "line",
+    },
+    toolTip: {
+        shared: true
+    },
+    legend:{
+        cursor:"pointer",
+    },
+    data: [{
+        type: "line",
             name: "func",
             dataPoints: baseLine(min, max, func)
             }, {
@@ -56,7 +56,7 @@ const ManageLine = function () {
     chart = createChart(-10.0, 10.0, func, centers[i], dotes[i][0], dotes[i][1]);
     chart.render();
 
-    const table = document.getElementById("table-cal");
+    const table = document.getElementById("table-cal-nibun");
     while( table.rows[ 1 ] ) table.deleteRow( 1 );
     const row = table.insertRow(-1);
     const cell1 = row.insertCell(-1);
@@ -90,7 +90,7 @@ const start = () =>{
 const reset = () =>{
     isExec = false;
     clearInterval(timer);
-    const table = document.getElementById("table-cal");
+    const table = document.getElementById("table-cal-nibun");
     while( table.rows[ 1 ] ) table.deleteRow( 1 );
 };
 
