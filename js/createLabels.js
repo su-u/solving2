@@ -8,8 +8,8 @@ const CreateLabels = (n,m) =>{
     return labels;
 };
 
-const getSelectNum = () =>{
-    const str = document.getElementById('num').value;
+const getSelectNum = (elementId) =>{
+    const str = document.getElementById(elementId).value;
     const num = parseInt(str,10);
     if(!isNaN(num)){
         return num
@@ -23,16 +23,16 @@ const getFunc = () =>{
         return Math.pow(x, 3.0) + x - 1.0;
     };
     const func2 = x =>{
-        return Math.pow(x, 3.0) + x - 10.0;
+        return (Math.pow(x, 3.0) + Math.pow(x, 2.0) - 30.0) * (-1);
     };
 
     const funcs = [func1, func1, func2];
-    return funcs[getSelectNum()];
+    return funcs[getSelectNum('num-nibun')];
 };
 
 const getRange = () =>{
-    const num = getSelectNum();
-    const range = [[-10.0, 10.0],[-10.0, 0.0],[-10.0,10.0]];
+    const range = [[-10.0, 10.0],[-10.0, -5.0],[-5.0,5.0]];
+    const num = getSelectNum('num-nibun');
     return [range[num][0], range[num][1]];
 };
 
