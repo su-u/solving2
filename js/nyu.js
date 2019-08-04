@@ -51,10 +51,7 @@ let chart;
 let isExec = false;
 
 
-const ManageLine = function () {
-    const func = getFunc();
-    const [range1, range2] = getRange();
-    const [centers, dotes] = nibun(range1, range2, func);
+const ManageLine = function (range1, range2, centers, dotes, func) {
     chart = createChartNyu(-10.0, 10.0, func, centers[i], dotes[i][0], dotes[i][1]);
     chart.render();
 
@@ -85,7 +82,10 @@ const start = () =>{
         reset();
         isExec = true;
         i = 0;
-        timer = setInterval("ManageLine()", 500);
+        const func = getFunc();
+        const [range1, range2] = getRange();
+        const [centers, dotes] = nibun(range1, range2, func);
+        timer = setInterval("ManageLine(range1, range2, centers, dotes, func)", 500);
     }
 };
 
