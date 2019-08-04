@@ -67,7 +67,7 @@ const ManageLine = function (range1, range2, centers, dotes, func) {
     cell3.innerHTML = dotes[i][1];
 
     i++;
-    if (i >= centers.length || i >= dotes.length) {
+    if (i >= 2 || i >= dotes.length) {
         const cell4 = row.insertCell(-1);
         const cell5 = row.insertCell(-1);
         cell4.innerHTML = centers[i - 1];
