@@ -18,7 +18,7 @@ const getSelectNum = (elementId) =>{
     }
 };
 
-const getFunc = () =>{
+const getFunc = (elementId) =>{
     const func1 = x =>{
         return Math.pow(x, 3.0) + x - 1.0;
     };
@@ -27,12 +27,12 @@ const getFunc = () =>{
     };
 
     const funcs = [func1, func1, func2];
-    return funcs[getSelectNum('num-nibun')];
+    return funcs[getSelectNum(elementId)];
 };
 
-const getRange = () =>{
+const getRange = (elementId) =>{
     const range = [[-10.0, 10.0],[-10.0, -5.0],[-5.0,5.0]];
-    const num = getSelectNum('num-nibun');
+    const num = getSelectNum(elementId);
     return [range[num][0], range[num][1]];
 };
 

@@ -52,8 +52,8 @@ let isExecNibun = false;
 
 
 const ManageLineNibun = function () {
-    const func = getFunc();
-    const [range1, range2] = getRange();
+    const func = getFunc('num-nibun');
+    const [range1, range2] = getRange('num-nibun');
     const [centers, dotes] = nibun(range1, range2, func);
     chartNibun = createChartNibun(-10.0, 10.0, func, centers[iNibun], dotes[iNibun][0], dotes[iNibun][1]);
     chartNibun.render();
